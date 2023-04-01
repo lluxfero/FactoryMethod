@@ -1,8 +1,8 @@
 ﻿Transport transport = new MechanicalTransport("Velomesto");
-Delivery delivery1 = transport.Create();
+Delivery delivery1 = transport.CreateDelivery();
 
 transport = new ElectricTransport("Volt Race");
-Delivery delivery2 = transport.Create();
+Delivery delivery2 = transport.CreateDelivery();
 
 Console.ReadLine();
 
@@ -16,7 +16,7 @@ abstract class Transport
         Speed = s;
     }
     // фабричный метод
-    abstract public Delivery Create();
+    abstract public Delivery CreateDelivery();
 }
 
 class MechanicalTransport : Transport
@@ -24,7 +24,7 @@ class MechanicalTransport : Transport
     public MechanicalTransport(string n) : base(n)
     { }
 
-    public override Delivery Create()
+    public override Delivery CreateDelivery()
     {
         return new BicycleDelivery();
     }
@@ -35,7 +35,7 @@ class ElectricTransport : Transport
     public ElectricTransport(string n) : base(n)
     { }
 
-    public override Delivery Create()
+    public override Delivery CreateDelivery()
     {
         return new ElectricScooterDelivery();
     }
