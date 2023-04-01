@@ -1,59 +1,59 @@
-﻿Transport transport = new MechanicalTransport("Velomesto");
-Delivery delivery1 = transport.CreateDelivery();
+﻿Delivery transport = new BicycleDelivery(1);
+Transport delivery1 = transport.CreateTransport();
 
-transport = new ElectricTransport("Volt Race");
-Delivery delivery2 = transport.CreateDelivery();
+transport = new ElectricScooterDelivery(0,5);
+Transport delivery2 = transport.CreateTransport();
 
 Console.ReadLine();
 
 
-abstract class Transport
+abstract class Delivery
 {
-    public string Speed { get; set; }
+    public int Time { get; set; }
 
-    public Transport(string s)
+    public Delivery(int t)
     {
-        Speed = s;
+        Time = t;
     }
     // фабричный метод
-    abstract public Delivery CreateDelivery();
+    abstract public Transport CreateTransport();
 }
-
-class MechanicalTransport : Transport
-{
-    public MechanicalTransport(string n) : base(n)
-    { }
-
-    public override Delivery CreateDelivery()
-    {
-        return new BicycleDelivery();
-    }
-}
-
-class ElectricTransport : Transport
-{
-    public ElectricTransport(string n) : base(n)
-    { }
-
-    public override Delivery CreateDelivery()
-    {
-        return new ElectricScooterDelivery();
-    }
-}
-
-abstract class Delivery
-{ }
 
 class BicycleDelivery : Delivery
 {
-    public BicycleDelivery()
+    public BicycleDelivery(int t) : base(t)
+    { }
+
+    public override Transport CreateTransport()
+    {
+        return new Bicycle();
+    }
+}
+
+class ElectricScooterDelivery : Delivery
+{
+    public ElectricScooterDelivery(int t) : base(t)
+    { }
+
+    public override Transport CreateTransport()
+    {
+        return new ElectricScooter();
+    }
+}
+
+abstract class Transport
+{ }
+
+class Bicycle : Transport
+{
+    public Bicycle()
     {
         Console.WriteLine("Заказ был доставлен на велосипеде");
     }
 }
-class ElectricScooterDelivery : Delivery
+class ElectricScooter : Transport
 {
-    public ElectricScooterDelivery()
+    public ElectricScooter()
     {
         Console.WriteLine("Заказ был доставлен на электросамокате");
     }
