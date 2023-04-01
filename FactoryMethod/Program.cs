@@ -1,8 +1,8 @@
-﻿Transport transport = new MechanicalTransport("Velomesto");
-Delivery delivery1 = transport.CreateDelivery();
+﻿Delivery delivery = new BicycleDelivery(2);
+Transport transport1 = delivery.CreateTransport();
 
-transport = new ElectricTransport("Volt Race");
-Delivery delivery2 = transport.CreateDelivery();
+delivery = new ElectricScooterDelivery(1);
+Transport transport2 = delivery.CreateTransport();
 
 Console.ReadLine();
 
